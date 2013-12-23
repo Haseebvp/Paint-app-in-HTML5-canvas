@@ -1,0 +1,275 @@
+<html>
+<head>
+<left>
+<canvas id="a" width="800" height="400" style="border:5px solid black;background color="white""></canvas>
+</left>
+<frame><center>
+<input type="button" value="Pencil" onclick="pencil()">
+<input type="button" value="Line" onclick="line()">
+<input type="button" value="Rectangle" onclick="rect()">
+<input type="button" value="Circle" onclick="circle()">
+<input type="button" value="Spray" onclick="spray()">
+<input type="button" value="brush" onclick="brush()">
+<input type="button" value="Erase" onclick="erase()">
+<input type="button" value="Clear" onclick="reset()">
+<input type="button" value="Save" onclick="save()">
+<input type="radio" name="__" onclick="fill()" value="1" >Fill
+<input type="radio" name="__" onclick="border()" value="0">Border
+</center></frame>
+<table><left><top>
+<table border=2 bgcolor=#FFFFFF align="left">
+<td><div onclick = "color('#0000ff')" style ="width:20px;height:20px;background-color:#0000ff"></div><td>
+<td><div onclick = "color('#009fff')" style ="width:20px;height:20px;background-color:#009fff"></div><td>
+<td><div onclick = "color('#0fffff')" style ="width:20px;height:20px;background-color:#0fffff"></div><td>
+<td><div onclick = "color('#bfffff')" style ="width:20px;height:20px;background-color:#bfffff"></div><td>
+<td><div onclick = "color('#000000')" style ="width:20px;height:20px;background-color:#000000"></div><td>
+<td><div onclick = "color('#333333')" style ="width:20px;height:20px;background-color:#333333"></div><td>
+<td><div onclick = "color('#666666')" style ="width:20px;height:20px;background-color:#666666"></div><td>
+<td><div onclick = "color('#999999')" style ="width:20px;height:20px;background-color:#999999"></div><td>
+<td><div onclick = "color('#ffcc66')" style ="width:20px;height:20px;background-color:#ffcc66"></div><td>
+<td><div onclick = "color('#ffcc00')" style ="width:20px;height:20px;background-color:#ffcc00"></div><td>
+<td><div onclick = "color('#ffff00')" style ="width:20px;height:20px;background-color:#ffff00"></div><td>
+<td><div onclick = "color('#ffff99')" style ="width:20px;height:20px;background-color:#ffff99"></div><td>
+<td><div onclick = "color('#003300')" style ="width:20px;height:20px;background-color:#003300"></div><td>
+<td><div onclick = "color('#555000')" style ="width:20px;height:20px;background-color:#555000"></div><td>
+<tr>
+<td><div onclick = "color('#00ff00')" style ="width:20px;height:20px;background-color:#00ff00"></div><td>
+<td><div onclick = "color('#99ff99')" style ="width:20px;height:20px;background-color:#99ff99"></div><td>
+<td><div onclick = "color('#f00000')" style ="width:20px;height:20px;background-color:#f00000"></div><td>
+<td><div onclick = "color('#ff6600')" style ="width:20px;height:20px;background-color:#ff6600"></div><td>
+<td><div onclick = "color('#ff9933')" style ="width:20px;height:20px;background-color:#ff9933"></div><td>
+<td><div onclick = "color('#F5DEB3')" style ="width:20px;height:20px;background-color:#F5DEB3"></div><td>
+<td><div onclick = "color('#FFFFFF')" style ="width:20px;height:20px;background-color:#FFFFFF"></div><td>
+<td><div onclick = "color('#663300')" style ="width:20px;height:20px;background-color:#663300"></div><td>
+<td><div onclick = "color('#cc6600')" style ="width:20px;height:20px;background-color:#cc6600"></div><td>
+<td><div onclick = "color('#DEB887')" style ="width:20px;height:20px;background-color:#DEB887"></div><td>
+<td><div onclick = "color('#aa0fff')" style ="width:20px;height:20px;background-color:#aa0fff"></div><td>
+<td><div onclick = "color('#cc66cc')" style ="width:20px;height:20px;background-color:#cc66cc"></div><td>
+<td><div onclick = "color('#ff66ff')" style ="width:20px;height:20px;background-color:#ff66ff"></div><td>
+<td><div onclick = "color('#ff99ff')" style ="width:20px;height:20px;background-color:#ff99ff"></div><td>
+
+</tr>
+</left></table>
+<script>
+
+var canvas=document.getElementById("a");
+var context=canvas.getContext('2d');
+
+function fill(){
+f=1;}
+function border(){
+f=0;}
+function pencil(){
+	canvas.onmousedown=pencildown;
+	canvas.onmouseup=pencilup;
+	canvas.onmousemove=pencilmove;function save() {
+  var imgg=canvas.toDataURL("image/png");
+  window.location = imgg;
+}
+function pencildown(a){
+	x=a.x;
+	y=a.y;
+	draw=true;
+	}
+function pencilup(){
+	draw=false;
+}
+function pencilmove(to){
+if (draw){
+   p =to.x;
+   q =to.y;
+   context.beginPath();
+   context.moveTo(x,y);
+   context.lineTo(p,q);
+   context.stroke();
+   context.closePath();
+   x=p;
+   y=q;
+ }}}
+function color(colour){
+context.strokeStyle=colour;
+context.fillStyle=colour;
+}
+function line(){
+	canvas.onmousedown=linedown;
+	canvas.onmouseup=lineup;
+	canvas.onmousemove=linemove;
+function linedown(a){
+	image=context.getImageData(0,0,canvas.width,canvas.height);
+	start1=a.x;
+	start2=a.y;
+	draw=true;}
+function lineup(){
+	draw=false;
+}
+function linemove(a){
+	if (draw){
+	context.putImageData(image,0,0);
+	end1=a.x;
+	end2=a.y;
+	context.beginPath();
+	context.moveTo(start1,start2);
+	context.lineTo(end1,end2);
+	context.stroke();
+	context.closePath();
+	
+}}}
+function rect(){
+	canvas.onmousedown=rectdown;
+	canvas.onmouseup=rectup;
+	canvas.onmousemove=rectmove;
+function rectdown(a){
+	image=context.getImageData(0,0,canvas.width,canvas.height);
+	start1=a.x;
+	start2=a.y;
+	draw=true;
+}
+function rectup(){
+	draw=false;
+}
+function rectmove(a){
+	if (draw){
+	context.putImageData(image,0,0);
+	width=a.x-start1;
+	height=a.y-start2;
+	context.strokeRect(start1,start2,width,height);
+	if(f==1){
+		context.fillRect(start1,start2,width,height);}}}}
+function circle(){
+	canvas.onmousedown=circledown;
+	canvas.onmouseup=circleup;
+	canvas.onmousemove=circlemove;
+
+function circledown(a){
+	image=context.getImageData(0,0,canvas.width,canvas.height);
+	start1=a.x;
+	start2=a.y;
+	draw=true;
+}
+function circleup(){
+	draw=false;
+}
+function circlemove(a){
+	if (draw){
+	context.putImageData(image,0,0);
+	end1=a.x;
+	end2=a.y;
+	context.beginPath();
+	context.arc(start1,start2,Math.sqrt(Math.pow(end1-start1,2)+Math.pow(end2-start2,2)),0,360,true);
+	context.stroke();
+	if(f==1){
+		context.fill();}
+	context.closePath();
+	
+}}}
+function brush(){
+	canvas.onmousedown=brushdown;
+	canvas.onmouseup=brushup;
+	canvas.onmousemove=brushmove;
+function brushdown(a){
+	x=a.x;
+	y=a.y;
+	draw=true;
+	}
+function brushup(){
+	draw=false;
+}
+function brushmove(to){
+if (draw){
+   p =to.x;
+   q =to.y;
+   context.beginPath();
+   context.moveTo(x,y);
+   context.lineTo(p,q);
+   context.stroke();
+   context.closePath();
+   x=p;
+   y=q;
+   context.lineWidth=5;		 }}}
+function spray(){
+	canvas.onmousedown=spraydown;
+	canvas.onmouseup=sprayup;
+	canvas.onmousemove=spraymove;
+function spraydown(a){
+	x=a.x;
+	y=a.y;
+	draw=true;
+	for (var i=0;i<10;i+=4){
+		context.fillRect(x+i,y+i,1.5,1.5);
+		context.fillRect(x-i,y-i,1.5,1.5);
+		context.fillRect(x-i,y+i,1.5,1.5);
+		context.fillRect(x+i,y-i,1.5,1.5);
+		context.fillRect(x-i,y,1,1);
+		context.fillRect(x,y-i,1,1);
+		context.fillRect(x,y+i,1,1);
+		context.fillRect(x+i,y,1,1);}
+		context.beginPath();
+	for(var i=0;i<10;i+=10){
+		context.arc(x+i,y+i,1, 0, 360, true); 
+		context.arc(x-i,y+i,1, 0, 360, true);
+		context.arc(x+i,y-i,1, 0, 360, true);
+		context.arc(x-i,y-i,1, 0, 360, true); 
+		context.arc(x,y-i,1, 0, 360, true);
+		context.arc(x-i,y,1, 0, 360, true);
+		context.arc(x,y+i,1, 0, 360, true);
+		context.arc(x+i,y,1, 0, 360, true);
+} 
+context.closePath();
+context.fill();
+}
+function sprayup(){
+	draw=false;}
+function spraymove(a){
+	if (draw){
+	x=a.x;
+	y=a.y;
+	for (var i=0;i<10;i+=4){
+		context.fillRect(x+i,y+i,1,1);
+		context.fillRect(x-i,y-i,1,1);
+		context.fillRect(x+i,y-i,1,1);
+		context.fillRect(x-i,y+i,1,1);
+		context.fillRect(x-i,y,1,1);
+		context.fillRect(x,y-i,1,1);
+		context.fillRect(x,y+i,1,1);
+		context.fillRect(x+i,y,1,1);}
+	context.beginPath();
+	for(var i=0;i<10;i+=10){
+		context.arc(x+i,y+i,1, 0, 360, true); 
+		context.arc(x-i,y+i,1, 0, 360, true);
+		context.arc(x+i,y-i,1, 0, 360, true);
+		context.arc(x-i,y-i,1, 0, 360, true);   
+		context.arc(x,y-i,1, 0, 360, true);
+		context.arc(x-i,y,1, 0, 360, true);
+		context.arc(x,y+i,1, 0, 360, true);
+		context.arc(x+i,y,1, 0, 360, true);
+}
+context.closePath();
+context.fill();}}}
+
+function save() {
+  var image=canvas.toDataURL("image/png");
+  window.location = image;
+}
+
+function erase(){
+	canvas.onmousedown=erasedown;
+	canvas.onmouseup=eraseup;
+	canvas.onmousemove=erasemove;
+function erasedown(a){
+	draw=true;
+}
+function eraseup(){
+	draw=false;
+}
+function erasemove(a){
+	if(draw){
+	x=a.x;
+	y=a.y;
+	context.clearRect(x,y,15,15);}}}		
+function reset(){
+	context.clearRect(0,0,800,600);}
+
+
+</script>
+</head>
+</html>
